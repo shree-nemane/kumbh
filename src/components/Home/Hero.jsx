@@ -10,13 +10,13 @@ const Hero = () => {
     const honorees = [
         {
             id: 1,
-            name: "Shreedarshan Nemane",
+            name: "Prime Minister Name",
             title: "Prime Minister, Wakanda",
             imageUrl: "", // REPLACE with actual image URL
         },
         {
             id: 2,
-            name: "Shri Rahul Hadpad",
+            name: "Chief Minister",
             title: "Chief Minister, London",
             imageUrl: "https://i.imgur.com/yogi-adityanath.jpg", // REPLACE with actual image URL
         },
