@@ -5,6 +5,7 @@ import React, {
   useCallback,
   useRef,
 } from "react";
+import { mapBackendAlert } from "../utils/mapAlert";
 
 export const AlertContext = createContext();
 
@@ -16,12 +17,12 @@ export const AlertProvider = ({ children }) => {
   const reconnectTimer = useRef(null);
 
   // Use environment variable if available (useful for prod/staging)
-const WS_URL =
-  (typeof process !== "undefined" &&
-    process.env &&
-    process.env.REACT_APP_ALERT_WS_URL) ||
-  import.meta.env.VITE_ALERT_WS_URL ||
-  "ws://localhost:8000";
+  const WS_URL =
+    (typeof process !== "undefined" &&
+      process.env &&
+      process.env.REACT_APP_ALERT_WS_URL) ||
+    import.meta.env.VITE_ALERT_WS_URL ||
+    "ws://localhost:8000";
 
 
   // --- Establish or re-establish WebSocket connection ---
@@ -40,9 +41,13 @@ const WS_URL =
 
       socket.onmessage = (event) => {
         try {
-          const data = JSON.parse(event.data);
-          console.log("🚨 Alert received:", data);
-          setAlert(data);
+          const raw = JSON.parse(event.data);
+          console.log("🚨 Raw alert received:", raw);
+
+          const mapped = mapBackendAlert(raw);
+          console.log("🎯 Mapped alert:", mapped);
+
+          setAlert(mapped); // <-- Now popup gets correct structure!
         } catch (err) {
           console.error("❌ Error parsing alert:", err);
         }

@@ -41,7 +41,7 @@ const AlertPopup = () => {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 40, scale: 0.95 }}
         transition={{ duration: 0.25 }}
-        className={`fixed z-[1000] flex justify-center sm:justify-end px-3 sm:px-5 w-full sm:w-auto`}
+        className={`fixed z-1000 flex justify-center sm:justify-end px-3 sm:px-5 w-full sm:w-auto`}
         style={{
           bottom: "1rem", // bottom for mobile
           right: "1rem",  // top-right for desktop
